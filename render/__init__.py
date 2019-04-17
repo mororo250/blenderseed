@@ -361,14 +361,11 @@ class RenderAppleseed(bpy.types.RenderEngine):
         Draw rendered image in Blender's viewport.
         """
 
-        width = int(context.region.width)
-        height = int(context.region.height)
-
         bgl.glEnable(bgl.GL_BLEND)
         bgl.glBlendFunc(bgl.GL_ONE, bgl.GL_ONE_MINUS_SRC_ALPHA)
         self.bind_display_space_shader(context.depsgraph.scene)
 
-        self.__tile_callback.draw_pixels(0, 0, width, height)
+        self.__tile_callback.draw_pixels()
 
         self.unbind_display_space_shader()
         bgl.glDisable(bgl.GL_BLEND)
